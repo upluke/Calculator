@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Calculator extends JFrame {
-
+    private String[] keyValues ={"7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "c", "0", "=", "/"} ;
     public Calculator(){
         super("Calculator");
 
@@ -12,10 +12,6 @@ public class Calculator extends JFrame {
         JMenu menu = new JMenu("Menu");
         menu.setMnemonic(KeyEvent.VK_M);
         menu.getAccessibleContext().setAccessibleDescription("This is a menu");
-//        Dimension menuBarPreferredSize = menuBar.getPreferredSize();
-//        menuBarPreferredSize.setSize(menuBarPreferredSize.getWidth(), 40);
-//        menuBar.setPreferredSize(menuBarPreferredSize);
-        // or
         menuBar.setPreferredSize(new Dimension(menuBar.getPreferredSize().width, 40));
         menuBar.add(menu);
 
@@ -29,19 +25,32 @@ public class Calculator extends JFrame {
         setJMenuBar(menuBar);
 
         // Display
-        JPanel panel = new JPanel();
+        JPanel textPanel = new JPanel();
         JTextField textField = new JTextField();
         textField.setEditable(false);
         textField.setHorizontalAlignment(JTextField.RIGHT);
         textField.setText("0");
-        panel.setLayout(new BorderLayout());
-        panel.add(textField, BorderLayout.CENTER);
-        add(panel);
+        textPanel.setLayout(new BorderLayout());
+        textPanel.add(textField, BorderLayout.CENTER);
 
+
+        // Number Keys
+        JPanel keyPanel = new JPanel();
+        keyPanel.setLayout(new GridLayout(4, 4));
+        for(int i = 0; i<keyValues.length;i++){
+            JButton button = new JButton(keyValues[i]);
+            keyPanel.add((button));
+        }
+
+        // Add textPanel and keyPanel to the frame
+        setLayout(new BorderLayout());
+        add(textPanel, BorderLayout.NORTH);
+        add(keyPanel, BorderLayout.CENTER);
 
 
         setSize(400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
 //        textField.setPreferredSize(new Dimension(panel.getWidth(), textField.getPreferredSize().height));
 
