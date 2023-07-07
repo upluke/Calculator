@@ -6,6 +6,9 @@ import java.awt.event.KeyEvent;
 
 public class Calculator extends JFrame  {
     private String[] keyValues ={"7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "c", "0", "=", "/"} ;
+    private String operatoers = "+-*/=c";
+    private int result = 0;
+    private boolean isEmptyField = false;
     public Calculator(){
         super("Calculator");
 
@@ -52,11 +55,32 @@ public class Calculator extends JFrame  {
             button.addActionListener(e -> {
                 String buttonText = ((JButton) e.getSource()).getText();
                 System.out.println(buttonText);
+                if(!operatoers.contains(buttonText)){
+                    if(isEmptyField){
+                        textField.setText("");
+                        isEmptyField=false;
+                    }
+                    textField.setText(textField.getText() + buttonText);
+                }else{
+                    System.out.println("operator!");
+                    switch (buttonText){
+                        case "+":
+                            result+= Integer.parseInt(textField.getText());
+                            isEmptyField=true;
+                            System.out.println(result);
+                            break;
+                        case "-":
+                            // TODO: Implement the missing functionality for the rest operators
+                            break;
+                    }
+
+                }
+
             });
-
-
             keyPanel.add((button));
         }
+
+
 
 
         // Add textPanel and keyPanel to the frame
