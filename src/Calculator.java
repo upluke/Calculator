@@ -8,7 +8,9 @@ public class Calculator extends JFrame  {
     private String[] keyValues ={"7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "c", "0", "=", "/"} ;
     private String operatoers = "+-*/=c";
     private int result = 0;
+    private boolean isFirstTyping = true;
     private boolean isEmptyField = false;
+
     public Calculator(){
         super("Calculator");
 
@@ -56,8 +58,10 @@ public class Calculator extends JFrame  {
                 String buttonText = ((JButton) e.getSource()).getText();
                 System.out.println(buttonText);
                 if(!operatoers.contains(buttonText)){
-                    if(isEmptyField){
+
+                    if(isFirstTyping | isEmptyField){
                         textField.setText("");
+                        isFirstTyping=false;
                         isEmptyField=false;
                     }
                     textField.setText(textField.getText() + buttonText);
@@ -68,9 +72,15 @@ public class Calculator extends JFrame  {
                             result+= Integer.parseInt(textField.getText());
                             isEmptyField=true;
                             System.out.println(result);
+                            // text field will update with the result after 1st round of operation
+                            if(result!=Integer.parseInt(textField.getText())){
+                                textField.setText(Integer.toString(result));
+                            }
                             break;
                         case "-":
                             // TODO: Implement the missing functionality for the rest operators
+
+
                             break;
                     }
 
