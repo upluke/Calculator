@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Calculator extends JFrame {
+
     public Calculator(){
         super("Calculator");
 
@@ -27,10 +28,23 @@ public class Calculator extends JFrame {
         menuBar.add(menu);
         setJMenuBar(menuBar);
 
+        // Display
+        JPanel panel = new JPanel();
+        JTextField textField = new JTextField();
+        textField.setEditable(false);
+        textField.setHorizontalAlignment(JTextField.RIGHT);
+        textField.setText("0");
+        panel.setLayout(new BorderLayout());
+        panel.add(textField, BorderLayout.CENTER);
+        add(panel);
+
+
 
         setSize(400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+//        textField.setPreferredSize(new Dimension(panel.getWidth(), textField.getPreferredSize().height));
+
     }
 
 
