@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class Calculator extends JFrame {
+public class Calculator extends JFrame  {
     private String[] keyValues ={"7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "c", "0", "=", "/"} ;
     public Calculator(){
         super("Calculator");
@@ -39,8 +41,23 @@ public class Calculator extends JFrame {
         keyPanel.setLayout(new GridLayout(4, 4));
         for(int i = 0; i<keyValues.length;i++){
             JButton button = new JButton(keyValues[i]);
+//          button.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    String buttonText = ((JButton) e.getSource()).getText();
+//                    System.out.println(buttonText);
+//                }
+//            });
+            // or with lambda
+            button.addActionListener(e -> {
+                String buttonText = ((JButton) e.getSource()).getText();
+                System.out.println(buttonText);
+            });
+
+
             keyPanel.add((button));
         }
+
 
         // Add textPanel and keyPanel to the frame
         setLayout(new BorderLayout());
@@ -52,7 +69,6 @@ public class Calculator extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-//        textField.setPreferredSize(new Dimension(panel.getWidth(), textField.getPreferredSize().height));
 
     }
 
