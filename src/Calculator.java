@@ -6,8 +6,9 @@ import java.awt.event.KeyEvent;
 
 public class Calculator extends JFrame  {
     private String[] keyValues ={"7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "c", "0", "=", "/"} ;
-    private String operatoers = "+-*/=c";
+    private String operators = "+-*/=c";
     private int result = 0;
+    private int tempNum= 0;
     private boolean isFirstTyping = true;
     private boolean isEmptyField = false;
 
@@ -56,32 +57,38 @@ public class Calculator extends JFrame  {
             // or with lambda
             button.addActionListener(e -> {
                 String buttonText = ((JButton) e.getSource()).getText();
-                System.out.println(buttonText);
-                if(!operatoers.contains(buttonText)){
+                System.out.println("entry: "+ buttonText);
+                if(!operators.contains(buttonText)){
 
-                    if(isFirstTyping | isEmptyField){
+                    if(result==0 | isEmptyField){
                         textField.setText("");
-                        isFirstTyping=false;
                         isEmptyField=false;
                     }
+                    tempNum=Integer.parseInt(buttonText);
                     textField.setText(textField.getText() + buttonText);
                 }else{
-                    System.out.println("operator!");
                     switch (buttonText){
                         case "+":
-                            result+= Integer.parseInt(textField.getText());
+                            result+= tempNum;
                             isEmptyField=true;
-                            System.out.println(result);
+                            System.out.println("result in +: "+result);
                             // text field will update with the result after 1st round of operation
                             if(result!=Integer.parseInt(textField.getText())){
                                 textField.setText(Integer.toString(result));
                             }
                             break;
                         case "-":
-                            // TODO: Implement the missing functionality for the rest operators
+                            // TODO: Fix this
+//                            System.out.println(textField.getText());
+//                            result-= Integer.parseInt(textField.getText());
+//                            isEmptyField=true;
+//                            System.out.println("result in -: "+result);
+//                            // text field will update with the result after 1st round of operation
+//                            if(result!=Integer.parseInt(textField.getText())){
+//                                textField.setText(Integer.toString(result));
+//                            }
+//                            break;
 
-
-                            break;
                     }
 
                 }
