@@ -60,12 +60,17 @@ public class Calculator extends JFrame  {
                 System.out.println("entry: "+ buttonText);
                 if(!operators.contains(buttonText)){
 
-                    if(result==0 | isEmptyField){
+                    if(isFirstTyping | isEmptyField){
+                        System.out.println("state*: "+ buttonText + "result: " + result);
                         textField.setText("");
                         isEmptyField=false;
+                        isFirstTyping=false;
                     }
-                    tempNum=Integer.parseInt(buttonText);
+
                     textField.setText(textField.getText() + buttonText);
+                    tempNum= Integer.parseInt(textField.getText());
+                    System.out.println("tempNum: "+ tempNum);
+                    isEmptyField=false;
                 }else{
                     switch (buttonText){
                         case "+":
@@ -76,6 +81,7 @@ public class Calculator extends JFrame  {
                             if(result!=Integer.parseInt(textField.getText())){
                                 textField.setText(Integer.toString(result));
                             }
+
                             break;
                         case "-":
                             // TODO: Fix this
